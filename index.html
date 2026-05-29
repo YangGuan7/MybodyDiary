@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeFlow - 今日減肥生活日誌</title>
+    <link rel="stylesheet" href="./content/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">LifeFlow</h1>
+            <ul class="nav-links">
+                <li><a href="#" class="active">今日看板</a></li>
+                <li><a href="#">數據統計</a></li>
+                <li><a href="#">個人設定</a></li>
+                <li><button class="btn-logout">登出</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="header-top">
+                <div class="date-pager">
+                    <button class="btn-arrow" id="btn-prev-week" aria-label="上週">&lt;</button>
+                    <h2 class="current-month-year">2026 年 05 月 25 日 - 05 月 31 日</h2>
+                    <button class="btn-arrow" id="btn-next-week" aria-label="下週">&gt;</button>
+                </div>
+                <div class="goal-banner">
+                    <p>距離目標腰圍還有 <strong class="highlight">8 cm</strong>！</p>
+                </div>
+            </div>
+
+            <div class="mini-calendar-container">
+                <div class="calendar-week">
+                    <div class="calendar-day" data-date="2026-05-25">
+                        <span class="day-name">一</span>
+                        <span class="day-num">25</span>
+                    </div>
+                    <div class="calendar-day" data-date="2026-05-26">
+                        <span class="day-name">二</span>
+                        <span class="day-num">26</span>
+                    </div>
+                    <div class="calendar-day" data-date="2026-05-27">
+                        <span class="day-name">三</span>
+                        <span class="day-num">27</span>
+                    </div>
+                    <div class="calendar-day" data-date="2026-05-28">
+                        <span class="day-name">四</span>
+                        <span class="day-num">28</span>
+                    </div>
+                    <div class="calendar-day today active" data-date="2026-05-29">
+                        <span class="day-name">五</span>
+                        <span class="day-num">29</span>
+                        <span class="dot-indicator"></span>
+                    </div>
+                    <div class="calendar-day" data-date="2026-05-30">
+                        <span class="day-name">六</span>
+                        <span class="day-num">30</span>
+                    </div>
+                    <div class="calendar-day" data-date="2026-05-31">
+                        <span class="day-name">日</span>
+                        <span class="day-num">31</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <button class="btn-trigger-record" id="btn-open-log">
+            <span class="icon">✍️</span> 修改 / 填寫今日紀錄
+        </button>
+
+        <div class="main-action-area">
+            
+            <div class="overview-dashboard">
+                
+                <div class="widget-box widget-water-card">
+                    <div class="widget-icon">💧</div>
+                    <div class="widget-info">
+                        <span class="widget-label">今日飲水</span>
+                        <h3 class="widget-value"><span id="overview-water">0</span> <small>/ 3000 ml</small></h3>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="overview-water-bar" style="width: 0%;"></div>
+                        </div>
+                        
+                        <div class="main-water-actions">
+                            <button class="btn-water" data-amount="250">+ 250ml</button>
+                            <button class="btn-water" data-amount="500">+ 500ml</button>
+                            <button class="btn-water" data-amount="700">+ 700ml</button>
+                            <button class="btn-water-reset">重設</button>
+                        </div>
+
+                        <div class="water-log-container">
+                            <p class="water-log-title">飲水時間軸：</p>
+                            <ul class="water-log-list" id="water-records-list">
+                                </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="widget-sub-group">
+                    <div class="widget-box widget-weight">
+                        <div class="widget-icon">⚖️</div>
+                        <div class="widget-info">
+                            <span class="widget-label">今日體重</span>
+                            <h3 class="widget-value"><span id="overview-weight">62.0</span> <small>kg</small></h3>
+                            <p class="widget-sub-text">目標：64 cm 腰圍（當前 72 cm）</p>
+                        </div>
+                    </div>
+
+                    <div class="widget-box widget-poop">
+                        <div class="widget-icon">💩</div>
+                        <div class="widget-info">
+                            <span class="widget-label">便便狀況</span>
+                            <div class="poop-badge smooth" id="overview-poop">
+                                <span class="badge-emoji">✨</span> 順暢清爽
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            
+
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="record-modal">
+        <div class="modal-window">
+            
+            <div class="modal-header">
+                <h2>✍️ 記錄今日生活 (<span id="modal-date-title">2026-05-29</span>)</h2>
+                <button class="btn-close-modal" id="btn-close-log">&times;</button>
+            </div>
+
+            <div class="modal-body-scroll">
+                <div class="dashboard-grid">
+
+                    <section class="card card-water">
+                        <h3>💧 飲水追蹤</h3>
+                        <div class="water-status">
+                            <div class="water-cup-wrapper">
+                                <div class="water-wave" style="height: 62.5%;"></div> 
+                                <span class="water-percentage">1250 / 2000 ml</span>
+                            </div>
+                        </div>
+                        <div class="water-actions">
+                            <button class="btn-water" data-amount="250">+ 250ml</button>
+                            <button class="btn-water" data-amount="500">+ 500ml</button>
+                            <button class="btn-water-reset">重設</button>
+                        </div>
+                    </section>
+
+                    <section class="card card-poop">
+                        <h3>💩 腸胃蠕動</h3>
+                        <p class="card-subtitle">記錄今天的排便狀態（單選）</p>
+                        <div class="poop-options">
+                            <button class="btn-poop active" data-status="smooth">
+                                <span class="emoji">✨</span>
+                                <span class="label">順暢</span>
+                            </button>
+                            <button class="btn-poop" data-status="constipated">
+                                <span class="emoji">🧱</span>
+                                <span class="label">便秘</span>
+                            </button>
+                            <button class="btn-poop" data-status="diarrhea">
+                                <span class="emoji">🌊</span>
+                                <span class="label">拉肚</span>
+                            </button>
+                            <button class="btn-poop" data-status="none">
+                                <span class="emoji">❌</span>
+                                <span class="label">沒上</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <section class="card card-metrics">
+                        <h3>⚖️ 今日體態</h3>
+                        <div class="form-group-row">
+                            <div class="input-wrapper">
+                                <label for="weight">體重 (kg)</label>
+                                <input type="number" id="weight" step="0.1" placeholder="62.0">
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="waist">腰圍 (cm)</label>
+                                <input type="number" id="waist" step="0.1" placeholder="72.0">
+                            </div>
+                        </div>
+                        <button class="btn-save-metrics">儲存體態</button>
+                    </section>
+
+                    <section class="card card-meals">
+                        <h3>🍳 飲食與記帳日誌</h3>
+                        <div class="meals-container">
+                            <div class="meal-row" data-meal="breakfast">
+                                <div class="meal-type">🌅 早餐</div>
+                                <div class="meal-inputs">
+                                    <input type="text" class="input-food" placeholder="吃了什麼？例如：雞胸肉...">
+                                    <div class="cost-wrapper">
+                                        <span>$</span>
+                                        <input type="number" class="input-cost" placeholder="花費">
+                                    </div>
+                                    <div class="rating-wrapper">
+                                        <select class="select-rating">
+                                            <option value="5">⭐⭐⭐⭐⭐</option>
+                                            <option value="4">⭐⭐⭐⭐</option>
+                                            <option value="3">⭐⭐⭐</option>
+                                            <option value="2">⭐⭐</option>
+                                            <option value="1">⭐</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="meal-row" data-meal="lunch">
+                                <div class="meal-type">☀️ 午餐</div>
+                                <div class="meal-inputs">
+                                    <input type="text" class="input-food" placeholder="吃了什麼？">
+                                    <div class="cost-wrapper"><span>$</span><input type="number" class="input-cost" placeholder="花費"></div>
+                                    <select class="select-rating"><option value="5">⭐⭐⭐⭐⭐</option><option value="3" selected>⭐⭐⭐</option></select>
+                                </div>
+                            </div>
+                            <div class="meal-row" data-meal="dinner">
+                                <div class="meal-type">🌙 晚餐</div>
+                                <div class="meal-inputs">
+                                    <input type="text" class="input-food" placeholder="吃了什麼？">
+                                    <div class="cost-wrapper"><span>$</span><input type="number" class="input-cost" placeholder="花費"></div>
+                                    <select class="select-rating"><option value="5">⭐⭐⭐⭐⭐</option><option value="3" selected>⭐⭐⭐</option></select>
+                                </div>
+                            </div>
+                            <div class="meal-row" data-meal="snack">
+                                <div class="meal-type">🍰 點心</div>
+                                <div class="meal-inputs">
+                                    <input type="text" class="input-food" placeholder="偷吃了什麼？">
+                                    <div class="cost-wrapper"><span>$</span><input type="number" class="input-cost" placeholder="花費"></div>
+                                    <select class="select-rating"><option value="3">⭐⭐⭐</option><option value="2" selected>⭐⭐</option></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="meals-footer">
+                            <button class="btn-save-meals">儲存今日飲食與帳目</button>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 LifeFlow 心得記錄 Side Project. Made with Supabase.</p>
+    </footer>
+
+    <script src="./script/all.js"></script>
+</body>
+</html>

@@ -1,0 +1,901 @@
+/* ==========================================================================
+   1. 基礎設定與變數 (Reset & Variables)
+   ========================================================================== */
+:root {
+    --bg-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-main: #2c3e50;
+    --text-muted: #7f8c8d;
+    --primary: #42b983;
+    /* 健康草綠 */
+    --primary-hover: #389e6f;
+    --water-color: #4da7fc;
+    /* 水杯深藍 */
+    --water-light: #e3f2fd;
+    /* 水杯淺藍背景 */
+    --danger: #ff6b6b;
+    --border-radius: 16px;
+    --shadow: 0 8px 24px rgba(149, 157, 165, 0.08);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. 全站導覽列 (Navbar)
+   ========================================================================== */
+.navbar {
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 32px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary);
+}
+
+.btn-logout {
+    background: none;
+    border: 1px solid #dcdde1;
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.btn-logout:hover {
+    background-color: var(--danger);
+    color: white;
+    border-color: var(--danger);
+}
+
+/* ==========================================================================
+   3. 主版面布局與週曆 (Header & Mini Calendar)
+   ========================================================================== */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 24px;
+}
+
+.dashboard-header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 32px;
+    width: 100%;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.date-pager {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-arrow {
+    background: var(--card-bg);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.btn-arrow:hover {
+    transform: scale(1.05);
+    background-color: var(--primary);
+    color: white;
+}
+
+.current-month-year {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.goal-banner {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+}
+
+.highlight {
+    color: var(--primary-hover);
+    font-size: 18px;
+}
+
+/* 橫式迷你月曆容器 */
+.mini-calendar-container {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+    overflow-x: auto;
+}
+
+.calendar-week {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 600px;
+}
+
+/* 單個日期天數卡片 */
+.calendar-day {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    background-color: #f8f9fa;
+}
+
+.calendar-day:hover {
+    background-color: #eef2f3;
+    transform: translateY(-2px);
+}
+
+.day-name {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.day-num {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+/* 週曆特殊狀態：當天與選中 */
+.calendar-day.today {
+    background-color: #e8f5e9;
+}
+
+.calendar-day.today .day-num {
+    color: var(--primary);
+}
+
+.calendar-day.active {
+    background-color: var(--primary) !important;
+    box-shadow: 0 4px 12px rgba(66, 185, 131, 0.3);
+    transform: translateY(-2px);
+}
+
+.calendar-day.active .day-name,
+.calendar-day.active .day-num {
+    color: white !important;
+}
+
+.dot-indicator {
+    width: 5px;
+    height: 5px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 6px;
+}
+
+.calendar-day.active .dot-indicator {
+    background-color: white;
+}
+
+/* ==========================================================================
+   4. 首頁大儀表板指標區 (Overview Dashboard Widgets)
+   ========================================================================== */
+.main-action-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+    padding: 20px 0 40px 0;
+}
+
+.overview-dashboard {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.widget-box {
+    flex: 1;
+    min-width: 280px;
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: var(--transition);
+}
+
+.widget-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(149, 157, 165, 0.12);
+}
+
+.widget-icon {
+    font-size: 32px;
+    background-color: #f8f9fa;
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.widget-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.widget-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.widget-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.widget-value small {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.widget-sub-text {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* 儀表板橫向進度條 */
+.progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    margin-top: 6px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #64b5f6, var(--water-color));
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 便便狀態狀態標籤 */
+.poop-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 4px;
+    width: fit-content;
+}
+
+.poop-badge.smooth {
+    background-color: #fff9db;
+    color: #f59f00;
+}
+
+.poop-badge.constipated {
+    background-color: #f1f3f5;
+    color: #495057;
+}
+
+.poop-badge.diarrhea {
+    background-color: #e3f2fd;
+    color: #1e88e5;
+}
+
+.poop-badge.none {
+    background-color: #fff5f5;
+    color: #ff6b6b;
+}
+
+/* 喚起 Modal 的主要按鈕 */
+.btn-trigger-record {
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(66, 185, 131, 0.25);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+}
+
+.btn-trigger-record:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(66, 185, 131, 0.35);
+}
+
+/* ==========================================================================
+   5. 全畫面遮罩彈窗 (Modal Window Framework)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(44, 62, 80, 0.5);
+    backdrop-filter: blur(6px);
+    /* 質感系毛玻璃 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-window {
+    background-color: var(--card-bg);
+    width: 92%;
+    max-width: 860px;
+    max-height: 85vh;
+    border-radius: 24px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(24px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.125);
+}
+
+.modal-overlay.open .modal-window {
+    transform: translateY(0);
+}
+
+.modal-header {
+    padding: 20px 28px;
+    border-bottom: 1px solid #f1f2f6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.btn-close-modal {
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1;
+    transition: var(--transition);
+}
+
+.btn-close-modal:hover {
+    color: var(--danger);
+}
+
+.modal-body-scroll {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+    background-color: var(--bg-color);
+    /* 讓內部卡片與表單有層次感 */
+}
+
+/* ==========================================================================
+   6. 彈窗內部的模組化填寫卡片 (Modal Cards Layout)
+   ========================================================================== */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* 特殊卡片：飲食日誌寬度過度為兩欄 */
+.card-meals {
+    grid-column: span 1;
+}
+
+@media (min-width: 768px) {
+    .card-meals {
+        grid-column: span 2;
+    }
+}
+
+/* 💧 彈窗內直立式水杯互動 */
+.water-status {
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+}
+
+.water-cup-wrapper {
+    width: 110px;
+    height: 140px;
+    border: 4px solid var(--text-main);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    position: relative;
+    overflow: hidden;
+    background-color: #f1f2f6;
+}
+
+.water-wave {
+    background-color: var(--water-color);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.water-percentage {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text-main);
+    text-shadow: 0 0 4px white;
+    z-index: 5;
+}
+
+.water-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-water {
+    flex: 2;
+    background-color: var(--water-light);
+    color: #1e88e5;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-water:hover {
+    background-color: #1e88e5;
+    color: white;
+}
+
+.btn-water-reset {
+    flex: 1;
+    background: none;
+    border: 1px dashed var(--text-muted);
+    color: var(--text-muted);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* 💩 彈窗內排便按鈕微互動 */
+.poop-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.btn-poop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-poop:hover {
+    background-color: #f1f2f6;
+}
+
+.btn-poop.active {
+    background-color: #fff9db;
+    border-color: #fcc419;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(252, 196, 25, 0.18);
+}
+
+.btn-poop .emoji {
+    font-size: 22px;
+    margin-bottom: 2px;
+}
+
+.btn-poop .label {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* ⚖️ 體態表單 */
+.form-group-row {
+    display: flex;
+    gap: 12px;
+}
+
+.input-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-wrapper label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+input[type="number"],
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #dcdde1;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: var(--transition);
+}
+
+input:focus,
+select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(66, 185, 131, 0.1);
+}
+
+.btn-save-metrics,
+.btn-save-meals {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.btn-save-metrics:hover,
+.btn-save-meals:hover {
+    background-color: var(--primary-hover);
+}
+
+/* 🍳 飲食與記帳列表結構 */
+.meals-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.meal-row {
+    display: flex;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f1f2f6;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.meal-row:last-child {
+    border-bottom: none;
+}
+
+.meal-type {
+    font-weight: 600;
+    min-width: 64px;
+    font-size: 14px;
+}
+
+.meal-inputs {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    min-width: 260px;
+}
+
+.input-food {
+    flex: 2.5;
+}
+
+.cost-wrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cost-wrapper span {
+    position: absolute;
+    left: 10px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.cost-wrapper input {
+    padding-left: 22px;
+}
+
+.select-rating {
+    flex: 1.5;
+    min-width: 90px;
+}
+
+.meals-footer {
+    margin-top: 6px;
+}
+
+/* ==========================================================================
+   7. 頁尾與其他 (Footer)
+   ========================================================================== */
+.main-footer {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* 隱藏捲動軸但保持滾動功能（針對迷你月曆） */
+.mini-calendar-container::-webkit-scrollbar {
+    display: none;
+}
+
+.mini-calendar-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* ==========================================================================
+   修正：主頁喝水卡片與右側群組排版
+   ========================================================================== */
+.widget-water-card {
+    flex: 1.5;
+    /* 讓喝水卡片寬一點，方便操作按鈕 */
+    min-width: 320px;
+    align-items: flex-start;
+    /* 讓內容靠上對齊 */
+}
+
+.widget-sub-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 280px;
+}
+
+/* 主頁喝水按鈕容器間距 */
+.main-water-actions {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    margin-top: 12px;
+}
+
+/* 讓主頁喝水按鈕高度與手感更好 */
+.main-water-actions .btn-water {
+    flex: 2;
+    background-color: var(--water-light);
+    color: #1e88e5;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.main-water-actions .btn-water:hover {
+    background-color: #1e88e5;
+    color: white;
+}
+
+.main-water-actions .btn-water-reset {
+    flex: 1;
+    background: none;
+    border: 1px dashed var(--text-muted);
+    color: var(--text-muted);
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   新增：喝水時間序列清單樣式
+   ========================================================================== */
+.water-log-container {
+    width: 100%;
+    margin-top: 16px;
+    border-top: 1px dashed #eedee15;
+    padding-top: 12px;
+}
+
+.water-log-title {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.water-log-list {
+    list-style: none;
+    max-height: 120px;
+    /* 限制高度，超出時可滾動 */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-right: 4px;
+}
+
+/* 每一條喝水紀錄 */
+.water-log-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    animation: fadeIn 0.2s ease;
+    /* 新增紀錄時的淡入小特效 */
+}
+
+.water-item-info {
+    display: flex;
+    gap: 8px;
+    color: var(--text-main);
+}
+
+.water-item-time {
+    color: #1e88e5;
+    /* 時間用藍色標示 */
+    font-weight: 600;
+}
+
+/* 單獨刪除按鈕 */
+.btn-delete-water {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 16px;
+    cursor: pointer;
+    line-height: 1;
+    transition: var(--transition);
+}
+
+.btn-delete-water:hover {
+    color: var(--danger);
+    transform: scale(1.1);
+}
+
+/* 簡單的淡入動畫 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
