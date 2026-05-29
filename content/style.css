@@ -1,21 +1,32 @@
 /* ==========================================================================
-   1. 基礎設定與變數 (Reset & Variables)
+   1. 基礎設定與變數 (Reset & Variables) —— 已改為燕麥咖啡色系
    ========================================================================== */
 :root {
-    --bg-color: #f4f7f6;
+    --bg-color: #fcfbfa;
+    /* 溫暖的極淺生燕麥色 */
     --card-bg: #ffffff;
-    --text-main: #2c3e50;
-    --text-muted: #7f8c8d;
-    --primary: #42b983;
-    /* 健康草綠 */
-    --primary-hover: #389e6f;
-    --water-color: #4da7fc;
-    /* 水杯深藍 */
-    --water-light: #e3f2fd;
-    /* 水杯淺藍背景 */
-    --danger: #ff6b6b;
+    --text-main: #4a3e3d;
+    /* 深焙咖啡褐 */
+    --text-muted: #8e807e;
+    /* 淺炭褐 */
+
+    --primary: #a67c52;
+    /* 核心色：拿鐵深焦糖 */
+    --primary-hover: #8c6239;
+    /* 摩卡深褐 */
+    --primary-light: #f5ebe0;
+    /* 燕麥奶白背景 */
+
+    --water-color: #bfa89e;
+    /* 質感奶茶色 (取代原水藍，維持整體色調平衡) */
+    --water-light: #f0eae4;
+    /* 淺奶茶色背景 */
+
+    --danger: #c97a7a;
+    /* 柔和的肉桂紅 */
     --border-radius: 16px;
-    --shadow: 0 8px 24px rgba(149, 157, 165, 0.08);
+    --shadow: 0 8px 24px rgba(166, 124, 82, 0.05);
+    /* 帶有咖啡色調的微陰影 */
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -38,7 +49,7 @@ body {
    ========================================================================== */
 .navbar {
     background-color: var(--card-bg);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 2px 10px rgba(166, 124, 82, 0.02);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -82,7 +93,7 @@ body {
 
 .btn-logout {
     background: none;
-    border: 1px solid #dcdde1;
+    border: 1px solid #e6dfda;
     padding: 6px 16px;
     border-radius: 20px;
     cursor: pointer;
@@ -157,10 +168,12 @@ body {
 }
 
 .goal-banner {
-    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    background: linear-gradient(135deg, #f5ebe0, #e3d5ca);
+    /* 燕麥漸層風 */
     padding: 10px 20px;
     border-radius: 30px;
     font-size: 14px;
+    color: #6e5856;
 }
 
 .highlight {
@@ -195,11 +208,11 @@ body {
     cursor: pointer;
     transition: var(--transition);
     position: relative;
-    background-color: #f8f9fa;
+    background-color: #faf8f5;
 }
 
 .calendar-day:hover {
-    background-color: #eef2f3;
+    background-color: #f2ebe4;
     transform: translateY(-2px);
 }
 
@@ -217,7 +230,7 @@ body {
 
 /* 週曆特殊狀態：當天與選中 */
 .calendar-day.today {
-    background-color: #e8f5e9;
+    background-color: var(--primary-light);
 }
 
 .calendar-day.today .day-num {
@@ -226,7 +239,7 @@ body {
 
 .calendar-day.active {
     background-color: var(--primary) !important;
-    box-shadow: 0 4px 12px rgba(66, 185, 131, 0.3);
+    box-shadow: 0 4px 12px rgba(166, 124, 82, 0.25);
     transform: translateY(-2px);
 }
 
@@ -281,12 +294,12 @@ body {
 
 .widget-box:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(149, 157, 165, 0.12);
+    box-shadow: 0 12px 28px rgba(166, 124, 82, 0.1);
 }
 
 .widget-icon {
     font-size: 32px;
-    background-color: #f8f9fa;
+    background-color: #faf8f5;
     width: 60px;
     height: 60px;
     border-radius: 16px;
@@ -329,7 +342,7 @@ body {
 .progress-bar-bg {
     width: 100%;
     height: 8px;
-    background-color: #e9ecef;
+    background-color: #f0eae4;
     border-radius: 4px;
     margin-top: 6px;
     overflow: hidden;
@@ -337,7 +350,7 @@ body {
 
 .progress-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #64b5f6, var(--water-color));
+    background: linear-gradient(90deg, #d4c5bd, var(--water-color));
     border-radius: 4px;
     width: 0%;
     transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -357,23 +370,23 @@ body {
 }
 
 .poop-badge.smooth {
-    background-color: #fff9db;
-    color: #f59f00;
+    background-color: #f7ede2;
+    color: #bd7a5c;
 }
 
 .poop-badge.constipated {
-    background-color: #f1f3f5;
-    color: #495057;
+    background-color: #f1edeb;
+    color: #6e6563;
 }
 
 .poop-badge.diarrhea {
-    background-color: #e3f2fd;
-    color: #1e88e5;
+    background-color: #eae4e1;
+    color: #8c7269;
 }
 
 .poop-badge.none {
-    background-color: #fff5f5;
-    color: #ff6b6b;
+    background-color: #fceeed;
+    color: #c97a7a;
 }
 
 /* 喚起 Modal 的主要按鈕 */
@@ -386,7 +399,7 @@ body {
     font-weight: 600;
     border-radius: 40px;
     cursor: pointer;
-    box-shadow: 0 10px 24px rgba(66, 185, 131, 0.25);
+    box-shadow: 0 10px 24px rgba(166, 124, 82, 0.2);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -395,7 +408,7 @@ body {
 
 .btn-trigger-record:hover {
     transform: translateY(-3px);
-    box-shadow: 0 14px 30px rgba(66, 185, 131, 0.35);
+    box-shadow: 0 14px 30px rgba(166, 124, 82, 0.3);
 }
 
 /* ==========================================================================
@@ -407,9 +420,9 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(44, 62, 80, 0.5);
+    background-color: rgba(74, 62, 61, 0.4);
+    /* 微調遮罩顏色，帶咖啡灰調 */
     backdrop-filter: blur(6px);
-    /* 質感系毛玻璃 */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -430,7 +443,7 @@ body {
     max-width: 860px;
     max-height: 85vh;
     border-radius: 24px;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 24px 60px rgba(74, 62, 61, 0.12);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -444,7 +457,7 @@ body {
 
 .modal-header {
     padding: 20px 28px;
-    border-bottom: 1px solid #f1f2f6;
+    border-bottom: 1px solid #f7f2ee;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -474,7 +487,6 @@ body {
     overflow-y: auto;
     flex: 1;
     background-color: var(--bg-color);
-    /* 讓內部卡片與表單有層次感 */
 }
 
 /* ==========================================================================
@@ -501,7 +513,6 @@ body {
     font-weight: 600;
 }
 
-/* 特殊卡片：飲食日誌寬度過度為兩欄 */
 .card-meals {
     grid-column: span 1;
 }
@@ -510,76 +521,6 @@ body {
     .card-meals {
         grid-column: span 2;
     }
-}
-
-/* 💧 彈窗內直立式水杯互動 */
-.water-status {
-    display: flex;
-    justify-content: center;
-    padding: 12px 0;
-}
-
-.water-cup-wrapper {
-    width: 110px;
-    height: 140px;
-    border: 4px solid var(--text-main);
-    border-top: none;
-    border-radius: 0 0 16px 16px;
-    position: relative;
-    overflow: hidden;
-    background-color: #f1f2f6;
-}
-
-.water-wave {
-    background-color: var(--water-color);
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.water-percentage {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    top: 50%;
-    transform: translateY(-50%);
-    font-weight: 700;
-    font-size: 13px;
-    color: var(--text-main);
-    text-shadow: 0 0 4px white;
-    z-index: 5;
-}
-
-.water-actions {
-    display: flex;
-    gap: 8px;
-}
-
-.btn-water {
-    flex: 2;
-    background-color: var(--water-light);
-    color: #1e88e5;
-    border: none;
-    padding: 10px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.btn-water:hover {
-    background-color: #1e88e5;
-    color: white;
-}
-
-.btn-water-reset {
-    flex: 1;
-    background: none;
-    border: 1px dashed var(--text-muted);
-    color: var(--text-muted);
-    border-radius: 8px;
-    cursor: pointer;
 }
 
 /* 💩 彈窗內排便按鈕微互動 */
@@ -594,7 +535,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 10px;
-    background-color: #f8f9fa;
+    background-color: #faf8f5;
     border: 2px solid transparent;
     border-radius: 12px;
     cursor: pointer;
@@ -602,14 +543,14 @@ body {
 }
 
 .btn-poop:hover {
-    background-color: #f1f2f6;
+    background-color: #f2ebe4;
 }
 
 .btn-poop.active {
-    background-color: #fff9db;
-    border-color: #fcc419;
+    background-color: #f5ebe0;
+    border-color: var(--primary);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(252, 196, 25, 0.18);
+    box-shadow: 0 4px 12px rgba(166, 124, 82, 0.12);
 }
 
 .btn-poop .emoji {
@@ -646,17 +587,19 @@ input[type="text"],
 select {
     width: 100%;
     padding: 10px 12px;
-    border: 1px solid #dcdde1;
+    border: 1px solid #ebd9cb;
     border-radius: 8px;
     font-size: 14px;
     outline: none;
+    color: var(--text-main);
+    background-color: #fff;
     transition: var(--transition);
 }
 
 input:focus,
 select:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(66, 185, 131, 0.1);
+    box-shadow: 0 0 0 3px rgba(166, 124, 82, 0.1);
 }
 
 .btn-save-metrics,
@@ -688,7 +631,7 @@ select:focus {
     display: flex;
     align-items: center;
     padding-bottom: 14px;
-    border-bottom: 1px solid #f1f2f6;
+    border-bottom: 1px solid #f7f2ee;
     gap: 12px;
     flex-wrap: wrap;
 }
@@ -752,7 +695,6 @@ select:focus {
     font-size: 13px;
 }
 
-/* 隱藏捲動軸但保持滾動功能（針對迷你月曆） */
 .mini-calendar-container::-webkit-scrollbar {
     display: none;
 }
@@ -767,10 +709,8 @@ select:focus {
    ========================================================================== */
 .widget-water-card {
     flex: 1.5;
-    /* 讓喝水卡片寬一點，方便操作按鈕 */
     min-width: 320px;
     align-items: flex-start;
-    /* 讓內容靠上對齊 */
 }
 
 .widget-sub-group {
@@ -781,7 +721,6 @@ select:focus {
     min-width: 280px;
 }
 
-/* 主頁喝水按鈕容器間距 */
 .main-water-actions {
     display: flex;
     gap: 8px;
@@ -789,11 +728,10 @@ select:focus {
     margin-top: 12px;
 }
 
-/* 讓主頁喝水按鈕高度與手感更好 */
 .main-water-actions .btn-water {
     flex: 2;
     background-color: var(--water-light);
-    color: #1e88e5;
+    color: var(--primary-hover);
     border: none;
     padding: 8px;
     border-radius: 8px;
@@ -804,7 +742,7 @@ select:focus {
 }
 
 .main-water-actions .btn-water:hover {
-    background-color: #1e88e5;
+    background-color: var(--primary);
     color: white;
 }
 
@@ -824,7 +762,7 @@ select:focus {
 .water-log-container {
     width: 100%;
     margin-top: 16px;
-    border-top: 1px dashed #eedee15;
+    border-top: 1px dashed #ebd9cb;
     padding-top: 12px;
 }
 
@@ -838,7 +776,6 @@ select:focus {
 .water-log-list {
     list-style: none;
     max-height: 120px;
-    /* 限制高度，超出時可滾動 */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -846,17 +783,15 @@ select:focus {
     padding-right: 4px;
 }
 
-/* 每一條喝水紀錄 */
 .water-log-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f8f9fa;
+    background-color: #faf8f5;
     padding: 6px 12px;
     border-radius: 8px;
     font-size: 13px;
     animation: fadeIn 0.2s ease;
-    /* 新增紀錄時的淡入小特效 */
 }
 
 .water-item-info {
@@ -866,12 +801,10 @@ select:focus {
 }
 
 .water-item-time {
-    color: #1e88e5;
-    /* 時間用藍色標示 */
+    color: var(--primary);
     font-weight: 600;
 }
 
-/* 單獨刪除按鈕 */
 .btn-delete-water {
     background: none;
     border: none;
@@ -887,7 +820,6 @@ select:focus {
     transform: scale(1.1);
 }
 
-/* 簡單的淡入動畫 */
 @keyframes fadeIn {
     from {
         opacity: 0;
